@@ -1,5 +1,8 @@
 package io.klask.web.rest.errors;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import org.springframework.web.util.HtmlUtils;
+
 import java.io.Serializable;
 
 public class FieldErrorDTO implements Serializable {
@@ -30,4 +33,13 @@ public class FieldErrorDTO implements Serializable {
         return message;
     }
 
+    @JsonGetter("message")
+    public String getHtmlSafeMessage(){
+        return HtmlUtils.htmlEscape(this.message);
+    }
+
+    @JsonGetter("field")
+    public String getHtmlSafeDescription(){
+        return HtmlUtils.htmlEscape(this.field);
+    }
 }
